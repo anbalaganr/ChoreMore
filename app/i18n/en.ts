@@ -4,6 +4,12 @@ const en = {
     cancel: "Cancel",
     back: "Back",
   },
+  homeScreen: {
+    title: "Home Screen",
+    welcome: "Welcome to your new app",
+    subtitle: "This screen is the starting point for everything",
+    next: "Next",
+  },
   welcomeScreen: {
     postscript:
       "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",

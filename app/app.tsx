@@ -52,6 +52,15 @@ const config = {
         DemoCommunity: "community",
       },
     },
+    Chore: {
+      screens: {
+        Home: "home",
+        AddChore: "addChore",
+        Statistics: "statistics",
+        LeaderBoard: "leaderBoard",
+        Settings: "settings",
+      },
+    },
   },
 }
 

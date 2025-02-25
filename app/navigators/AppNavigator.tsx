@@ -4,13 +4,14 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
-import { NavigationContainer } from "@react-navigation/native"
+import { NavigationContainer, NavigationContainerRef } from "@react-navigation/native"
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack"
 import * as Screens from "@/screens"
 import Config from "../config"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useAppTheme, useThemeProvider } from "@/utils/useAppTheme"
 import { ComponentProps } from "react"
+import { ChoreNavigator } from "./ChoreNavigator"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -28,6 +29,11 @@ import { ComponentProps } from "react"
 export type AppStackParamList = {
   Welcome: undefined
   // 🔥 Your screens go here
+  Settings: undefined
+  Home: undefined
+  AddChore: undefined
+  Statistics: undefined
+  LeaderBoard: undefined
   // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
@@ -60,8 +66,14 @@ const AppStack = () => {
         },
       }}
     >
-      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
+      <Stack.Screen name="Chore" component={ChoreNavigator} />
+
       {/** 🔥 Your screens go here */}
+      <Stack.Screen name="Settings" component={Screens.SettingsScreen} />
+      <Stack.Screen name="Home" component={Screens.HomeScreen} />
+      <Stack.Screen name="AddChore" component={Screens.AddChoreScreen} />
+      <Stack.Screen name="Statistics" component={Screens.StatisticsScreen} />
+      <Stack.Screen name="LeaderBoard" component={Screens.LeaderBoardScreen} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )
@@ -77,7 +89,11 @@ export const AppNavigator = (props: NavigationProps) => {
 
   return (
     <ThemeProvider value={{ themeScheme, setThemeContextOverride }}>
-      <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props}>
+      <NavigationContainer
+        ref={navigationRef as React.Ref<NavigationContainerRef<{}>>}
+        theme={navigationTheme}
+        {...props}
+      >
         <AppStack />
       </NavigationContainer>
     </ThemeProvider>
