@@ -10,6 +10,47 @@ const en = {
     subtitle: "This screen is the starting point for everything",
     next: "Next",
   },
+  settingsScreen: {
+    title: "Settings",
+    management: {
+      title: "Management",
+      menuItems: {
+        managePlaces: "Manage Places",
+        manageMembers: "Manage Members",
+        manageChores: "Manage Chores",
+      },
+    },
+    account: {
+      title: "Account",
+      menuItems: {
+        accountSettings: "Account Settings",
+        logOut: "Log Out",
+      },
+    },
+    subscription: {
+      title: "Subscription",
+      menuItems: {
+        manageSubscription: "Manage Subscription",
+        shareYourPremium: "Share Your Premium",
+      },
+    },
+    preferences: {
+      title: "Preferences",
+      menuItems: {
+        appearance: "Appearance",
+        choreEditor: "Chore Editor",
+        notifications: "Notifications",
+      },
+    },
+    resources: {
+      title: "Resources",
+      menuItems: {
+        helpAndSupport: "Help & Support",
+        privacyPolicy: "Privacy Policy",
+        termsOfService: "Terms of Service",
+      },
+    },
+  },
   welcomeScreen: {
     postscript:
       "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
