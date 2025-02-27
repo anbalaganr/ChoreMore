@@ -4,23 +4,26 @@ import { Text } from "./Text"
 import { useAppTheme } from "../utils/useAppTheme"
 import { spacing } from "../theme"
 
-export type FilterTabOption = "All" | "My Day" | "My Week"
-
-interface SegmentedTabsProps {
-  activeTab: FilterTabOption
-  onTabChange: (tab: FilterTabOption) => void
+export interface SegmentedTabsProps<T extends string> {
+  tabs: T[]
+  activeTab: T
+  onTabChange: (tab: T) => void
 }
 
-export function SegmentedTabs({ activeTab, onTabChange }: SegmentedTabsProps) {
+export function SegmentedTabs<T extends string>({
+  tabs,
+  activeTab,
+  onTabChange,
+}: SegmentedTabsProps<T>) {
   const { theme } = useAppTheme()
   const { colors } = theme
 
-  const tabs: FilterTabOption[] = ["All", "My Day", "My Week"]
-
   return (
     <View style={[$container, { backgroundColor: colors.tintInactive }]}>
-      {tabs.map((tab) => {
+      {tabs.map((tab, index) => {
         const isActive = tab === activeTab
+        const isFirst = index === 0
+        const isLast = index === tabs.length - 1
 
         return (
           <TouchableOpacity
@@ -29,18 +32,22 @@ export function SegmentedTabs({ activeTab, onTabChange }: SegmentedTabsProps) {
             style={[
               $tabButton,
               isActive && {
-                backgroundColor: colors.tint,
-                shadowOpacity: 0.1, // Optional subtle lift for iOS
-                shadowRadius: 2,
-                shadowOffset: { height: 1, width: 0 },
-                elevation: 1, // Optional subtle lift for Android
+                backgroundColor: colors.tint, // ✅ Active tab color
+                borderRadius: spacing.xl, // ✅ Fully round when selected
               },
+              !isActive &&
+                isFirst && { borderTopLeftRadius: spacing.xl, borderBottomLeftRadius: spacing.xl },
+              !isActive &&
+                isLast && { borderTopRightRadius: spacing.xl, borderBottomRightRadius: spacing.xl },
             ]}
             activeOpacity={0.9}
           >
             <Text
               text={tab}
-              style={[$tabText, { color: isActive ? colors.background : colors.text }]}
+              style={[
+                $tabText,
+                { color: isActive ? colors.background : colors.text }, // ✅ Active text color
+              ]}
             />
           </TouchableOpacity>
         )
@@ -49,20 +56,24 @@ export function SegmentedTabs({ activeTab, onTabChange }: SegmentedTabsProps) {
   )
 }
 
+// ✅ Styles
 const $container: ViewStyle = {
   flexDirection: "row",
   alignItems: "center",
-  borderRadius: spacing.xl,
+  borderRadius: spacing.xl, // ✅ Ensures container has rounded corners
   marginTop: spacing.md,
-  gap: 3, // Consistent small gap between tabs
+  padding: 3,
+  position: "relative",
+  overflow: "hidden",
 }
 
+// ✅ Tab Button (No Default Border Radius to Avoid Conflicts)
 const $tabButton: ViewStyle = {
   flex: 1,
-  paddingVertical: spacing.xxs,
   alignItems: "center",
   justifyContent: "center",
-  borderRadius: spacing.xl,
+  paddingVertical: spacing.xxs,
+  marginHorizontal: 1, // ✅ Small gap to ensure rounding is visible
 }
 
 const $tabText: TextStyle = {
