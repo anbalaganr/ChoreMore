@@ -51,6 +51,15 @@ const en = {
       },
     },
   },
+  leaderBoardScreen: {
+    title: "Leader Board",
+  },
+  addChoreScreen: {
+    title: "Add Chore",
+  },
+  statisticsScreen: {
+    title: "Statistics",
+  },
   welcomeScreen: {
     postscript:
       "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",

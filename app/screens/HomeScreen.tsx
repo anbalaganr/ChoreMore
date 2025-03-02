@@ -35,7 +35,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
       />
 
       <SegmentedTabs
-        tabs={["All", "My Day"]} // ✅ Pass any dynamic tabs
+        tabs={["Pending", "Completed", "Overdue"]} // ✅ Pass any dynamic tabs
         activeTab={activeTab}
         onTabChange={setActiveTab} // ✅ Updates the state when a tab is clicked
       />

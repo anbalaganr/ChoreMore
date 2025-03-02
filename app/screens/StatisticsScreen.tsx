@@ -2,19 +2,34 @@ import { FC } from "react"
 import { ViewStyle } from "react-native"
 import { AppStackScreenProps } from "@/navigators"
 import { Screen, Text } from "@/components"
-// import { useNavigation } from "@react-navigation/native"
+import { useAppTheme } from "@/utils/useAppTheme"
+import { isRTL, TxKeyPath } from "@/i18n" // ✅ Import TxKeyPath for correct typing
+import { ThemedStyle } from "@/theme"
+import { $styles } from "@/theme"
 
 interface StatisticsScreenProps extends AppStackScreenProps<"Statistics"> {}
 
 export const StatisticsScreen: FC<StatisticsScreenProps> = () => {
-  // Pull in navigation via hook
-  // const navigation = useNavigation()
+  const {
+    themed,
+    theme: { colors },
+  } = useAppTheme()
+
   return (
-    <Screen style={$root} preset="scroll" safeAreaEdges={["top", "bottom"]}>
-      <Text text="statistics" />
+    <Screen
+      style={$root}
+      preset="scroll"
+      contentContainerStyle={$styles.container}
+      safeAreaEdges={["top"]}
+    >
+      <Text preset="heading" tx="statisticsScreen:title" style={themed($title)} />
     </Screen>
   )
 }
+
+const $title: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  marginBottom: spacing.sm,
+})
 
 const $root: ViewStyle = {
   flex: 1,
